@@ -32,4 +32,17 @@ class GlobalExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response)
     }
+
+    @ExceptionHandler(Exception::class)
+    fun handleInternalException(
+        ex: Exception
+    ): ResponseEntity<BaseResponse<Any>> {
+
+        val response = BaseResponse<Any>(
+            status = ResponseStatus.INTERNAL_ERROR,
+            data = null
+        )
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response)
+    }
 }
